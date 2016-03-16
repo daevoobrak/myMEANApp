@@ -112,20 +112,17 @@ myApp.controller('loginController',
         }, 3000);
       });
     }
-    $scope.onFileSelect = function($files) {
-    //$files: an array of files selected, each file has name, size, and type.
-    for (var i = 0; i < $files.length; i++) {
-      var file = $files[i];
-      $scope.upload = Upload.upload({
-        url: '/user/upload',
-        data: {myObj: $scope.myModelObj},
-        file: file,
-      }).progress(function(evt) {
-        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-      }).success(function(data, status, headers, config) {
-        // file is uploaded successfully
-        console.log(data);
-      });
-    }
+    $scope.onFileSelect = function(file) {
+      Upload.upload({
+            url: '/user/upload',
+            data: {file: file, username: localStorage.getItem('username')}
+        }).then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
   };
 }]);

@@ -76,6 +76,6 @@ router.post('/update',function(req,res){
 });
 
 router.post('/upload', function(req,res){
-  console.log("helloo"+req.body.data);
+  console.log("helloo"+JSON.parse(req));
 });
 module.exports = router;

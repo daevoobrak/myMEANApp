@@ -16,10 +16,10 @@
   </div>
   <hr>
   <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-3" ng-controller="homeController">
       <h5><strong>Image</strong></h5>
       <hr>
-      <input type="file" ng-file-select="onFileSelect($files)" multiple>
+      <div class="btn btn-link" ngf-select="onFileSelect($file)">Upload on file select</div>
     </div>
     <div class="col-sm-5">
       <form class="form-horizontal" role="form" ng-submit="updateDetails()">
