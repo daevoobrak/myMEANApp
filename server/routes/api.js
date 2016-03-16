@@ -51,5 +51,14 @@ router.get('/logout', function(req, res) {
   });
 });
 
+router.get('/details/:id',function(req,res){
+  User.find({username: req.params.id} ,function (err, user){
+    if (err)
+      res.send(err);
+    console.log('userList'+user);
+    res.json(user); // return user info
+  });
+});
+
 
 module.exports = router;

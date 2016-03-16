@@ -53,7 +53,7 @@ myApp.controller('loginController',
       $scope.disabled = true;
 
       // call register from service
-      AuthService.register($scope.registerForm.username, $scope.registerForm.password)
+      AuthService.register($scope.registerForm.username, $scope.registerForm.password,$scope.registerForm.fName, $scope.registerForm.lName)
         // handle success
         .then(function () {
           $location.path('/login');
@@ -71,11 +71,18 @@ myApp.controller('loginController',
     };
 
 }])
-.controller('homeController', ['$scope', '$location', 'AuthService', function($scope, $location, AuthService){
-    console.log("Authhh"+AuthService.isLoggedIn());
+.controller('homeController', 
+    ['$scope', '$location', 'AuthService','userInfo',
+    function($scope, $location, AuthService,userInfo){
+    //debugger;
+    //console.log("Authhh"+AuthService.isLoggedIn());
     if(!AuthService.isLoggedIn()){
       $location.path('/login');
     }else{
-
+      id=localStorage.getItem("username");
+      userInfo.get(id).then(function(response){
+        console.log('ressstt'+response.data);
+        $scope.userDetails= response.data;
+      });
     }
 }]);

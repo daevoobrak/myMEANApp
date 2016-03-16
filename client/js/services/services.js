@@ -5,6 +5,7 @@ myApp.factory('AuthService',
     // create user variable
     var user = null;
     function isLoggedIn() {
+      //console.log('user', localStorage.getItem('username'));
       userStatus = localStorage.getItem('user');
       if(userStatus == "true") {
         return true;
@@ -27,12 +28,15 @@ myApp.factory('AuthService',
         {username: username, password: password})
         // handle success
         .success(function (data, status) {
+          //console.log("data"+username);
           if(status === 200 && data.status){
             localStorage.setItem("user", true);
+            localStorage.setItem("username", username);
             user = true;
             deferred.resolve();
           } else {
             localStorage.setItem("user", false);
+            localStorage.removeItem("username");
             user = false;
             deferred.reject();
           }
@@ -58,12 +62,14 @@ myApp.factory('AuthService',
         // handle success
         .success(function (data) {
           localStorage.setItem("user", false);
+          localStorage.removeItem("username");
           user = false;
           deferred.resolve();
         })
         // handle error
         .error(function (data) {
           localStorage.setItem("user", false);
+          localStorage.removeItem("username");
           user = false;
           deferred.reject();
         });
@@ -73,14 +79,14 @@ myApp.factory('AuthService',
 
     }
 
-    function register(username, password) {
+    function register(username, password,fName,lName) {
 
       // create a new instance of deferred
       var deferred = $q.defer();
 
       // send a post request to the server
       $http.post('/user/register',
-        {username: username, password: password})
+        {username: username, password: password,name:{first:fName,last:lName} })
         // handle success
         .success(function (data, status) {
           if(status === 200 && data.status){
