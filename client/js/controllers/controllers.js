@@ -81,8 +81,8 @@ myApp.controller('loginController',
     }else{
       id=localStorage.getItem("username");
       userInfo.get(id).then(function(response){
-        console.log('ressstt'+response.data);
-        $scope.userDetails= response.data;
+        console.log('ressstt'+JSON.parse(response.data));
+        $scope.userDetails= JSON.parse(response.data)[0];
       });
     }
 }]);

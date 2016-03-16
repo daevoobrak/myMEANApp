@@ -56,7 +56,7 @@ router.get('/details/:id',function(req,res){
     if (err)
       res.send(err);
     console.log('userList'+user);
-    res.json(user); // return user info
+    res.status(200).json(JSON.stringify(user)); // return user info
   });
 });
 
