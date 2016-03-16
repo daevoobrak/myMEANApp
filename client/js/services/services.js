@@ -86,7 +86,18 @@ myApp.factory('AuthService',
 
       // send a post request to the server
       $http.post('/user/register',
-        {username: username, password: password,name:{first:fName,last:lName} })
+        {
+          username: username,
+          password: password,
+          userinfo:
+          {
+            name:
+            {
+              first:fName,
+              last:lName
+            }
+          }
+        })
         // handle success
         .success(function (data, status) {
           if(status === 200 && data.status){

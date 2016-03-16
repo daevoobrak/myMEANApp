@@ -72,10 +72,8 @@ myApp.controller('loginController',
 
 }])
 .controller('homeController', 
-    ['$scope', '$location', 'AuthService','userInfo',
-    function($scope, $location, AuthService,userInfo){
-    //debugger;
-    //console.log("Authhh"+AuthService.isLoggedIn());
+    ['$scope', '$location', 'AuthService','userInfo','$http','$timeout',
+    function($scope, $location, AuthService,userInfo,$http,$timeout){
     if(!AuthService.isLoggedIn()){
       $location.path('/login');
     }else{
@@ -83,6 +81,35 @@ myApp.controller('loginController',
       userInfo.get(id).then(function(response){
         console.log('ressstt'+JSON.parse(response.data));
         $scope.userDetails= JSON.parse(response.data)[0];
+      });
+    }
+    $scope.updateDetails = function(){
+      console.log('inside this function');
+      $http.post('/user/update',{
+        username:localStorage.getItem('username'),
+        userinfo:
+        {
+          name:
+          {
+            first:$scope.userDetails.userinfo.name.first,
+            last:$scope.userDetails.userinfo.name.last
+          },
+          age:$scope.userDetails.userinfo.age,
+          qualifications:
+          {
+            highSchool:$scope.userDetails.userinfo.qualifications.highSchool,
+            intermediate:$scope.userDetails.userinfo.qualifications.intermediate,
+            ug:$scope.userDetails.userinfo.qualifications.ug,
+            pg:$scope.userDetails.userinfo.qualifications.pg,
+            others:$scope.userDetails.userinfo.qualifications.others
+          }
+        }
+      }).success(function(response){
+        $scope.message = "Profile Updated Successfully";
+        $scope.showMessage = true;
+        $timeout(function(){
+          $scope.showMessage = false;
+        }, 3000);
       });
     }
 }]);

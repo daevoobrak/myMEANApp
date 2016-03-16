@@ -61,4 +61,19 @@ router.get('/details/:id',function(req,res){
 });
 
 
+
+router.post('/update',function(req,res){
+  console.log('user',req.body);
+  User.find({username: req.body.username} ,function (err, user){
+    console.log('user',user);
+    if(err){
+      req.send(err);
+    }
+    else{
+      User.update({username: req.body.username},req.body,function(err,user){
+        res.status(200).json(JSON.stringify(user));
+      });
+    }
+  });
+});
 module.exports = router;

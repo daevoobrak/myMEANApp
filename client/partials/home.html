@@ -1,20 +1,80 @@
-<div ng-controller="logoutController">
+<div>
   <div class="row">
     <div class="col-sm-12">
-      
+      <div class="alert alert-success" ng-show="showMessage">
+        <strong>Success!</strong> {{message}}
+      </div>
     </div>
   </div>
   <div class="row" >
     <div class="col-sm-3">
-      <h5><strong>Welcome </strong>{{userDetails.username}}</h5>
+      <h5><strong>Welcome </strong>{{userDetails.userinfo.name.first}} {{userDetails.userinfo.name.last}}</h5>
     </div>
-    <div class="col-sm-9">
+    <div class="col-sm-9" ng-controller="logoutController">
       <a ng-click='logout()' class="btn btn-link pull-right">Logout</a>
     </div>
   </div>
+  <hr>
   <div class="row">
-    <div class="col-sm-6">
-      
+    <div class="col-sm-5">
+      <form class="form-horizontal" role="form" ng-submit="updateDetails()">
+        <div class="form-group">
+          <label class="control-label col-sm-3">First Name</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" name="fName" ng-model="userDetails.userinfo.name.first" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3">Last Name</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" name="lName" ng-model="userDetails.userinfo.name.last" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3">Age</label>
+          <div class="col-sm-3">
+            <input type="number" value="18" min="18" max="50" class="form-control" name="age" ng-model="userDetails.userinfo.age" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3">High School</label>
+          <div class="col-sm-9">  
+            <input type="text" class="form-control" name="hs" ng-model="userDetails.userinfo.qualifications.highSchool" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3">Intermediate</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" name="im" ng-model="userDetails.userinfo.qualifications.intermediate" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3">UG</label>
+          <div class="col-sm-9">  
+            <input type="text" class="form-control" name="ug" ng-model="userDetails.userinfo.qualifications.ug" >
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3">PG</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" name="pg" ng-model="userDetails.userinfo.qualifications.pg">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3">Others</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" name="other" ng-model="userDetails.userinfo.qualifications.others">
+          </div>
+        </div>
+        <div class="form-group"> 
+          <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-default" ng-disabled="disabled">Update</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $(".alert").fadeOut(3000 );
+</script>
