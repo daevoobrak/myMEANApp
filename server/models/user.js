@@ -19,6 +19,10 @@ var User = new Schema({
       ug:{type:String},
       pg:{type:String},
       others:{type:String}
+    },
+    image:{
+      profile:{data: Buffer, contentType: String},
+      coverPhoto:{data: Buffer, contentType: String}
     }
   }
 });

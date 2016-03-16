@@ -60,8 +60,6 @@ router.get('/details/:id',function(req,res){
   });
 });
 
-
-
 router.post('/update',function(req,res){
   console.log('user',req.body);
   User.find({username: req.body.username} ,function (err, user){
@@ -75,5 +73,9 @@ router.post('/update',function(req,res){
       });
     }
   });
+});
+
+router.post('/upload', function(req,res){
+  console.log("helloo"+req.body.data);
 });
 module.exports = router;

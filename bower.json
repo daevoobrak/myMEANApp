@@ -2,10 +2,11 @@
   "name": "starter-node-angular",
   "version": "1.0.0",
   "dependencies": {
-      "bootstrap": "latest",
-      "font-awesome": "latest",
-      "animate.css": "latest",
-      "angular": "latest",
-      "angular-route": "latest"   
+    "bootstrap": "latest",
+    "font-awesome": "latest",
+    "animate.css": "latest",
+    "angular": "latest",
+    "angular-route": "latest",
+    "ng-file-upload": "^12.0.4"
   }
 }
