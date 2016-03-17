@@ -19,7 +19,21 @@
     <div class="col-sm-3" ng-controller="homeController">
       <h5><strong>Image</strong></h5>
       <hr>
-      <div class="btn btn-link" ngf-select="onFileSelect($file)">Upload on file select</div>
+        <input 
+           type="file" 
+           ngf-select 
+           ng-model="file" 
+           name="file" 
+           ngf-pattern="'image/*'"
+           accept="image/*" 
+           ngf-max-size="20MB" 
+           />
+        <img style="width:100px;" ngf-thumbnail="file || 'images/default-user.png'"/>
+        <i ng-show="up.upload_form.file.$error.required">*required</i><br>
+        <i ng-show="up.upload_form.file.$error.maxSize">File too large 
+        {{up.file.size / 1000000|number:1}}MB: max 20M</i>
+        <button type="submit" class="btn btn-link" ng-click="onFileSelect(file)">Upload</button>
+        <p>{{up.progress}}</p>
     </div>
     <div class="col-sm-5">
       <form class="form-horizontal" role="form" ng-submit="updateDetails()">

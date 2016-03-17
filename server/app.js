@@ -37,6 +37,11 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 // configure passport
 passport.use(new localStrategy(User.authenticate()));

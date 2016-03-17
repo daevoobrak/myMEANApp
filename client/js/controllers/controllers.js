@@ -115,7 +115,7 @@ myApp.controller('loginController',
     $scope.onFileSelect = function(file) {
       Upload.upload({
             url: '/user/upload',
-            data: {file: file, username: localStorage.getItem('username')}
+            data: {file:file,username: localStorage.getItem('username')}
         }).then(function (resp) {
             console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
         }, function (resp) {

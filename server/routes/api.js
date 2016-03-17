@@ -3,7 +3,10 @@ var router = express.Router();
 var passport = require('passport');
 
 var User = require('../models/user.js');
-
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
+var multer  = require('multer')
+//var upload = multer({ dest: 'uploads/' })
 
 router.post('/register', function(req, res) {
   User.register(new User({ username: req.body.username }),
@@ -75,7 +78,32 @@ router.post('/update',function(req,res){
   });
 });
 
-router.post('/upload', function(req,res){
-  console.log("helloo"+JSON.parse(req));
+var storage = multer.diskStorage({ //multers disk storage settings
+    destination: function (req, file, cb) {
+        console.log('file'+file);
+        cb(null, './uploads/')
+    },
+    filename: function (req, file, cb) {
+        console.log('filessss'+file);
+        var datetimestamp = Date.now();
+        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
+    }
 });
+
+var upload = multer({ //multer settings
+                    storage: storage
+                }).single('file');
+
+router.post('/upload', function(req, res) {
+    upload(req,res,function(err){
+        if(err){
+             res.json({error_code:1,err_desc:err});
+             return;
+        }
+         res.json({error_code:0,err_desc:null});
+    })
+   
+});
+
+
 module.exports = router;
