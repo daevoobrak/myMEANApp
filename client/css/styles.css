@@ -1,0 +1,20 @@
+.prof_picture{
+  max-height: 100px;
+  overflow: hidden;
+}
+.image_container:hover > .upload_img{
+  display: inline-block;
+}
+.upload_img{
+  background-color: #00c4cc;
+  bottom: 0;
+  color: #fff;
+  display: none;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  opacity: .7;
+}
+.upload_img:hover{
+  color: #fff;
+}

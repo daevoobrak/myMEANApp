@@ -7,6 +7,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="./css/styles.css">
 
   <!-- JS -->
   <script src="libs/angular/angular.js"></script>
@@ -20,12 +21,13 @@
   <script src="./js/services/services.js"></script>
   <script src="./js/services/userinfo.js"></script>
   <script src="./js/controllers/controllers.js"></script>
+  <script src="./js/directives/d_user.js"></script>
 
   
   
 </head>
 
-  <div class="container">
+  <div class="container" ng-cloak>
     <div ng-view></div>
   </div>
 

@@ -80,7 +80,7 @@ router.post('/update',function(req,res){
 
 var storage = multer.diskStorage({ //multers disk storage settings
     destination: function (req, file, cb) {
-        console.log('file'+file);
+        console.log('file'+file.path);
         cb(null, './uploads/')
     },
     filename: function (req, file, cb) {
