@@ -23,11 +23,14 @@ var User = new Schema({
     image:{
       profile:{data: Buffer, contentType: String},
       coverPhoto:{data: Buffer, contentType: String}
-    }
+    },
+    status : {type:String ,default:"Add a custom status"}
   }
 });
 
 User.plugin(passportLocalMongoose);
+
+
 
 
 module.exports = mongoose.model('users', User);

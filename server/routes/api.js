@@ -3,6 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 
 var User = require('../models/user.js');
+var Post = require('../models/post.js');
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 var multer  = require('multer')
@@ -59,7 +60,13 @@ router.get('/details/:id',function(req,res){
     if (err)
       res.send(err);
     console.log('userList'+user);
-    res.status(200).json(JSON.stringify(user)); // return user info
+    Post.find({username: req.params.id} ,function (err, post){
+      if (err)
+        res.send(err);
+      console.log('Users post'+post);
+      res.status(200).json({post:JSON.stringify(post),userInfo:JSON.stringify(user)}); 
+    });
+    //res.status(200).json(JSON.stringify(user)); // return user info
   });
 });
 
@@ -103,6 +110,21 @@ router.post('/upload', function(req, res) {
          res.json({error_code:0,err_desc:null});
     })
    
+});
+
+router.post('/updatePost' ,function(req, res){
+    console.log('req.body.username'+req.body.username);
+    var post = new Post({username:req.body.username,post: req.body.post});
+    post.save(function(err,post){
+      if ( err ) throw err;
+      //console.log("You have become a Nerd!!!!"+post);
+      Post.find({username: req.body.username} ,function (err, post){
+        if (err)
+          res.send(err);
+        console.log('Users post'+post);
+        res.status(200).json(JSON.stringify(post)); 
+      });
+    });
 });
 
 

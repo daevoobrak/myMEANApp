@@ -79,12 +79,15 @@ myApp.controller('loginController',
     }else{
       id=localStorage.getItem("username");
       userInfo.get(id).then(function(response){
-        console.log('ressstt'+JSON.parse(response.data));
-        $scope.userDetails= JSON.parse(response.data)[0];
+        //console.log("These are the values that I ned"+JSON.parse(response.data.userInfo));
+        $scope.userDetails= JSON.parse(response.data.userInfo)[0];
+        $scope.listOfposts = JSON.parse(response.data.post);
+        $scope.statusUpdate =true;
       });
     }
+    $scope.statusUpdate =true;
     $scope.updateDetails = function(){
-      console.log('inside this function');
+      $scope.statusUpdate =true;
       $http.post('/user/update',{
         username:localStorage.getItem('username'),
         userinfo:
@@ -102,7 +105,8 @@ myApp.controller('loginController',
             ug:$scope.userDetails.userinfo.qualifications.ug,
             pg:$scope.userDetails.userinfo.qualifications.pg,
             others:$scope.userDetails.userinfo.qualifications.others
-          }
+          },
+          status:$scope.userDetails.userinfo.status
         }
       }).success(function(response){
         $scope.message = "Profile Updated Successfully";
@@ -125,4 +129,17 @@ myApp.controller('loginController',
             console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
         });
   };
+  $scope.addPost = function(status){
+    $http.post('/user/updatePost',{post:status,username: localStorage.getItem('username')}).then(function(response){
+        console.log("response.data-->"+response.data);
+        $scope.listOfposts = JSON.parse(response.data);
+    });
+  }
+  $scope.$watch('userDetails.userinfo.age',function(age){
+    if(age<=21){
+      $scope.isLegal ="N";
+    }else{
+      $scope.isLegal ="Y";
+    }
+  });
 }]);
