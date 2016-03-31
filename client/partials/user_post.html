@@ -1,10 +1,44 @@
-<div class="row" ng-repeat="p in listOfposts">
-  <div class="col-sm-2">
-    <div class="well">User Image</div>
-  </div>
-  <div class="col-sm-10">
-    <h5><strong>{{p.username}}</strong></h5>
-    <p>{{p.post}}</p>
-    <p>{{p.timeStamp}}</p>
-  </div>
-</div>
+<md-content>
+  <md-tabs md-dynamic-height md-border-bottom>
+    <md-tab label="Posts">
+      <md-content class="md-padding" layout-xs="column" layout="row">
+        <div flex-xs flex-gt-xs="100" layout="column">
+          <md-card ng-repeat="p in listOfposts">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">{{p.username}}</span>
+                <span class="md-subhead">{{p.post}}</span>
+              </md-card-title-text>
+              <md-card-title-media>
+                <div class="md-media-md card-media"></div>
+              </md-card-title-media>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button class="md-raised md-warn" ng-click="deletePost(p._id)">Delete</md-button>
+              <md-button class="md-raised">Update</md-button>
+            </md-card-actions>
+          </md-card>
+        </div>
+      </md-content>
+    </md-tab>
+    <md-tab label="Timeline">
+      <md-content class="md-padding">
+        <div ng-repeat="p in listOfposts">
+          <div class="user_timeline">
+            <h5><strong>{{p.username}}</strong></h5>
+            <h5>{{p.post}}</h5>
+            <small ng-bind="p.timeStamp | date"></small>
+            <div class="deletePost" ng-click="deletePost(p._id)">x</div>
+          </div>
+        </div>
+      </md-content>
+    </md-tab>
+    <md-tab label="MiniBlog">
+      <md-content class="md-padding">
+        <h1 class="md-display-2">Photos</h1>
+        <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+      </md-content>
+    </md-tab>
+  </md-tabs>
+</md-content>
+
