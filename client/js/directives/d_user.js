@@ -52,4 +52,8 @@ myApp.directive('userInfo', function(){
       
     }
   };
-});
+}).directive('userDetails',function(){
+    return {
+      templateUrl : '/partials/user_details.html',
+    }
+})

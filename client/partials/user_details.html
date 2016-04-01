@@ -1,0 +1,132 @@
+<ng-bind ng-init="editDetails=true"></ng-bind>
+<div class="col-sm-4 well" ng-show="editDetails">
+  <form class="form-horizontal" role="form" ng-submit="updateDetails()">
+    <div class="form-group">
+      <label class="control-label col-sm-4">First Name</label>
+      <div class="col-sm-8">
+        {{userDetails.userinfo.name.first}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4">Last Name</label>
+      <div class="col-sm-8">
+        {{userDetails.userinfo.name.last}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4">Age</label>
+      <div class="col-sm-3">
+        {{userDetails.userinfo.age}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4">High School</label>
+      <div class="col-sm-8">  
+        {{userDetails.userinfo.qualifications.highSchool}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4">Intermediate</label>
+      <div class="col-sm-8">
+        {{userDetails.userinfo.qualifications.intermediate}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4">UG</label>
+      <div class="col-sm-8">  
+        {{userDetails.userinfo.qualifications.ug}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4">PG</label>
+      <div class="col-sm-8">
+        {{userDetails.userinfo.qualifications.pg}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4">Others</label>
+      <div class="col-sm-8">
+        {{userDetails.userinfo.qualifications.others}}
+      </div>
+    </div>
+    <div class="form-group"> 
+      <div class="col-sm-offset-4 col-sm-8">
+        <button class="md-fab md-primary md-button md-ink-ripple" type="submit" ng-transclude="" ng-click="editDetails=!editDetails">
+          <i class="fa fa-pencil"></i>
+        <div class="md-ripple-container"></div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="col-sm-4 well" ng-hide="editDetails">
+  <md-content layout-padding>
+    <form name="userForm" class="form-horizontal" role="form" ng-submit="updateDetails()">
+      <md-input-container class="md-block">
+        <label>First Name</label>
+        <input md-maxlength="200" required md-no-asterisk name="fName" ng-model="userDetails.userinfo.name.first">
+        <div ng-messages="userForm.description.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Last Name</label>
+        <input md-maxlength="200" required md-no-asterisk name="lName" ng-model="userDetails.userinfo.name.last">
+        <div ng-messages="userForm.description.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Age</label>
+        <input md-maxlength="200" required md-no-asterisk name="age" ng-model="userDetails.userinfo.age">
+        <div ng-messages="userForm.description.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>High School</label>
+        <input md-maxlength="200" required md-no-asterisk name="hs" ng-model="userDetails.userinfo.qualifications.highSchool">
+        <div ng-messages="userForm.description.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Intermediate</label>
+        <input md-maxlength="200" required md-no-asterisk name="im" ng-model="userDetails.userinfo.qualifications.intermediate">
+        <div ng-messages="userForm.description.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      
+      
+      
+      
+     <!--  <div class="form-group">
+       <label class="control-label col-sm-4">UG</label>
+       <div class="col-sm-8">  
+         <input type="text" class="form-control" name="ug" ng-model="userDetails.userinfo.qualifications.ug" >
+       </div>
+     </div>
+     <div class="form-group">
+       <label class="control-label col-sm-4">PG</label>
+       <div class="col-sm-8">
+         <input type="text" class="form-control" name="pg" ng-model="userDetails.userinfo.qualifications.pg">
+       </div>
+     </div>
+     <div class="form-group">
+       <label class="control-label col-sm-4">Others</label>
+       <div class="col-sm-8">
+         <input type="text" class="form-control" name="other" ng-model="userDetails.userinfo.qualifications.others">
+       </div>
+     </div> -->
+      <div class="form-group"> 
+        <div class="col-sm-offset-4 col-sm-8">
+          <button class="md-fab md-primary md-button md-ink-ripple" type="submit" ng-transclude="" ng-click="editDetails=!editDetails">
+             <i class="fa fa-floppy-o"></i>
+            <div class="md-ripple-container"></div>
+          </button>
+        </div>
+      </div>
+    </form>
+  </md-content>
+</div>
